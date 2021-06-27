@@ -1,11 +1,13 @@
 import { Box, Text, Badge, Button } from "@chakra-ui/react";
 import React, { useState, useEffect, useContext } from "react";
 import { DatasetContext } from "../contexts/DatasetContext";
+import { ModelContext } from "../contexts/ModelContext";
 
 function DatasetCard(props) {
 
   const [info, setInfo] = useState({});
   const { dataset, changeDataset } = useContext(DatasetContext);
+  const { model, setAllAttrs } = useContext(ModelContext);
 
   useEffect(() => {
     fetch(`/api/datasets/info/${props.index}`).then((res) => res.json()).then((data) => setInfo(data));
@@ -16,6 +18,7 @@ function DatasetCard(props) {
       if(data) {
         console.log(data)
         changeDataset({index: props.index, ...data});
+        setAllAttrs(Object.keys(data.data[0]));
         return;
       } else {
         console.error("Failed to select this dataset :/");

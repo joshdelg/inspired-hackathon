@@ -1,6 +1,8 @@
 import React from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Box, Heading } from "@chakra-ui/react";
 import DatasetSelection from "./DatasetSelection";
+import ModelBuilder from "./ModelBuilder";
+import Results from "./Results";
 
 function Switch() {
     return (
@@ -16,10 +18,10 @@ function Switch() {
                         <DatasetSelection />
                     </TabPanel>
                     <TabPanel>
-                        <Heading>Model</Heading>
+                        <ModelBuilder />
                     </TabPanel>
                     <TabPanel>
-                        <Heading>Results</Heading>
+                        <Results />
                     </TabPanel>
                 </TabPanels>
             </Tabs>

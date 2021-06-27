@@ -47,6 +47,10 @@ app.get('/api/datasets/:id', (req, res) => {
     });
 })
 
+app.get('/api/train', (req, res) => {
+
+});
+
 app.get("/api", (req, res) => {
     fs.readFile(path.join(__dirname, '/datasets/auto-mpg/auto-mpg.names'), 'utf-8', (err, data) => {
         if(err) {
