@@ -1,27 +1,47 @@
 import { Box, Text, Badge, Button } from "@chakra-ui/react";
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { DatasetContext } from "../contexts/DatasetContext";
 
 function DatasetCard(props) {
 
-    const loadData = () => {
-        fetch("/api").then((res) => res.json()).then((data) => console.log(data));
-    }
+  const [info, setInfo] = useState({});
+  const { dataset, changeDataset } = useContext(DatasetContext);
 
-    return (
-      <Box bg="purple.100" p={4}>
+  useEffect(() => {
+    fetch(`/api/datasets/info/${props.index}`).then((res) => res.json()).then((data) => setInfo(data));
+  }, [])
+
+  const selectDataset = () => {
+    fetch(`/api/datasets/${props.index}`).then((res) => res.json()).then((data) => {
+      if(data) {
+        console.log(data)
+        changeDataset({index: props.index, ...data});
+        return;
+      } else {
+        console.error("Failed to select this dataset :/");
+      }
+    });
+  }
+
+  return (
+    <Box bg="purple.100" p={4}>
+      {info && (
+        <>
         <Text fontWeight="bold">
-          {props.name}
+          {info.name}
           <Badge ml={2} colorScheme="green">
-            Regression
+            {info.type}
           </Badge>
         </Text>
-        <Text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
-          expedita,.
-        </Text>
-        <Button onClick={loadData}>Click me!</Button>
-      </Box>
-    );
+        <Text>{info.description}</Text>
+        {
+          dataset && (dataset.index == props.index) ? (
+            <Button disabled>Dataset selected</Button>
+          ) : <Button onClick={selectDataset}>Select this dataset</Button>
+        }
+        </>)}
+    </Box>
+  );
 }
 
 export default DatasetCard;

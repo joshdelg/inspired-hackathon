@@ -9,7 +9,7 @@ function DatasetSelection() {
             <HStack my={12} p={4} bg="teal.200" justify="space-between">
                 {
                     [0, 1, 2].map((value) => (
-                        <DatasetCard key={value} name={`Dataset ${value}`} />
+                        <DatasetCard index={value} key={value} name={`Dataset ${value}`} />
                     ))
                 }
             </HStack>
