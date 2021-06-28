@@ -3,8 +3,8 @@ import { Box, Heading } from '@chakra-ui/react';
 
 function Header() {
     return (
-        <Box bg="purple.400" p={8}>
-            <Heading>Hello, world!</Heading>
+        <Box bg="teal.500" p={8}>
+            <Heading color="white" letterSpacing={4}>SimpleML</Heading>
         </Box>
     );
 }

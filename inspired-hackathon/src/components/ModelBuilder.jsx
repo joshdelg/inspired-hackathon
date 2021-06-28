@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
-import { Box, Heading, Flex, Select, Button } from "@chakra-ui/react";
+import { Box, Heading, Flex, Select, Button, useDisclosure, IconButton } from "@chakra-ui/react";
+import { QuestionIcon } from "@chakra-ui/icons";
 import { ModelContext } from "../contexts/ModelContext";
 import LinearRegressionBuilder from "./LinearRegressionBuilder";
 import { DatasetContext } from "../contexts/DatasetContext";
 import { DragDropContext } from "react-beautiful-dnd";
+import CustomModal from "./CustomModal";
 
 function ModelBuilder(props) {
 
@@ -49,27 +51,31 @@ function ModelBuilder(props) {
         }
     }
 
+    const {isOpen, onOpen, onClose} = useDisclosure();
+
     return (
-        <Box bg="gray.100" p={8} height="100%">
+        <>
+        <CustomModal isOpen={isOpen} onClose={onClose} bodyText="In this section, we will build a model that attempts to predict the MPG for a certain car given some attributes from the dataset. In the dropdown menu, select Linear Regression. This is one of the simplest machine learning algorithms so it will be the easiest to start with. In the first box, you will see a list of all the attributes in our dataset. We want to choose some that we want our model to use in order to predict the MPG of a car. Drag Cylinders, Displacement, Horsepower, Weight, Acceleration, and Model year into the X Attributes secion to tell the model that you want to use them to make predictions. To tell the model that you want to predict the MPG of a certiain car, drag the MPG attribute into the Y Attribute list."/>
+        <Box bg="white" p={8} height="100%">
             <Flex justifyContent="space-between" alignItems="center">
                 <Flex alignItems="center">
-                    <Heading mr={12}>Build your model</Heading>
+                    <Heading size="2xl" mr={12}>Build your model<IconButton variant="ghost" rounded="lg" colorScheme="teal" icon={<QuestionIcon />} onClick={onOpen}/></Heading>
                     <Box>
-                        <Select value={model.type} onChange={(e) => changeModelType(e.target.value)}>
+                        <Select value={model.type} onChange={(e) => changeModelType(e.target.value)} variant="filled">
                             <option value="reg">Linear Regression</option>
                             <option value="knn">K Nearest Neighbors</option>
                             <option value="nn">Neural Network</option>
                         </Select>
                     </Box>
                 </Flex>
-                <Button colorScheme="teal" size="lg">Train!</Button>
             </Flex>
             <DragDropContext onDragEnd={handleOnDragEnd}>
-                <Box bg="teal.200">
+                <Box>
                     {renderSpecificModelEditor()}
                 </Box>
             </DragDropContext>
         </Box>
+        </>
     );
 }
 

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Box, Heading, Flex } from "@chakra-ui/react";
+import { Box, Heading, Flex, Tooltip } from "@chakra-ui/react";
 import { DatasetContext } from "../contexts/DatasetContext";
 import { ModelContext } from "../contexts/ModelContext";
 import Attribute from "./Atrtibute";
@@ -17,10 +17,12 @@ function AttributeList(props) {
 
     return (
         <Box>
-            <Heading>{props.name}</Heading>
+            <Tooltip label={props.tip}>
+                <Heading>{props.name}</Heading>
+            </Tooltip>
             <Droppable droppableId={props.dropId}>
                 {(provided) => (
-                    <Flex className={props.dropId} {...provided.droppableProps} ref={provided.innerRef} flexDir="column">
+                    <Flex minHeight="300px" bg="white" border="1px" borderColor="gray.100" rounded="lg" my={4} p={4} className={props.dropId} {...provided.droppableProps} ref={provided.innerRef} flexDir="column">
                         {model[props.dropId].map((attr, attrIndex) => (
                             <Draggable key={attrIndex} draggableId={attr} index={attrIndex}>
                                 {(provided) => (

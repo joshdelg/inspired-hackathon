@@ -11,15 +11,15 @@ function LinearRegressionBuilder(props) {
     console.log('But here still', model.allAttrs);
 
     return (
-        <Grid my={8} bg="teal.500" templateRows="repeat(2, 1fr)" templateColumns="repeat(2, 1fr)">
-            <GridItem colSpan={2} bg="tomato">
-                <AttributeList attrs={model.allAttrs} name="All Attributes" dropId="allAttrs" dir="row"/>
+        <Grid my={8} templateColumns="repeat(3, 1fr)" columnGap={8}>
+            <GridItem>
+                <AttributeList attrs={model.allAttrs} name="All Attributes" dropId="allAttrs" dir="row" tip="Choose any of these attributes for your model to base its predictions off of."/>
             </GridItem>
-            <GridItem bg="teal.600">
-                <AttributeList attrs={model.xAttrs} name="X Attributes" dropId="xAttrs" dir="col"/>
+            <GridItem>
+                <AttributeList attrs={model.xAttrs} name="X Attributes" dropId="xAttrs" dir="col" tip={"The attributes in this section will be used by your model to make a prediction for the attribute under \"Y Attribute\""}/>
             </GridItem>
-            <GridItem bg="teal.700">
-                <AttributeList attrs={model.yAttrs} name="Y Attribute" dropId="yAttrs" dir="col"/>
+            <GridItem>
+                <AttributeList attrs={model.yAttrs} name="Y Attribute" dropId="yAttrs" dir="col" tip={"The attribute in here will be what your model attempts to predict."}/>
             </GridItem>
         </Grid>
     );

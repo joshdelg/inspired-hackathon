@@ -27,20 +27,20 @@ function DatasetCard(props) {
   }
 
   return (
-    <Box bg="purple.100" p={4}>
+    <Box bg="white" p={4} maxWidth="500px" rounded="lg" border="1px" borderColor="gray.200">
       {info && (
         <>
-        <Text fontWeight="bold">
+        <Text fontWeight="bold" mb={2}>
           {info.name}
-          <Badge ml={2} colorScheme="green">
+          <Badge ml={2} colorScheme="teal">
             {info.type}
           </Badge>
         </Text>
         <Text>{info.description}</Text>
         {
           dataset && (dataset.index == props.index) ? (
-            <Button disabled>Dataset selected</Button>
-          ) : <Button onClick={selectDataset}>Select this dataset</Button>
+            <Button colorScheme="teal" mt={4} disabled>Dataset selected</Button>
+          ) : <Button colorScheme="teal" mt={4} onClick={selectDataset}>Select this dataset</Button>
         }
         </>)}
     </Box>

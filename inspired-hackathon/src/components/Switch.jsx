@@ -6,7 +6,7 @@ import Results from "./Results";
 
 function Switch() {
     return (
-        <Box bg="tomato" px={8} py={4}>
+        <Box px={8} py={4}>
             <Tabs variant="enclosed">
                 <TabList>
                     <Tab>Dataset</Tab>
